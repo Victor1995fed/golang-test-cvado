@@ -1,0 +1,42 @@
+syntax = "proto3";
+package server;
+
+option go_package = "github.com/Victor1995fed/golang-test-cvado";
+
+// Сервер для поиска авторов и книг.
+service Cvado {
+  // Поиск книг по автору
+  rpc GetBooksByAuthor (RequestAuthor) returns (ResponseBook) {}
+  // Поиск авторов по книге
+  rpc GetAuthorByBook (RequestBook) returns (ResponseAuthor) {}
+}
+
+// Запрос по автору
+message RequestAuthor {
+  int64 id = 1;
+}
+
+// Запрос по книге
+message RequestBook {
+  int64 id = 1;
+}
+
+// Данные автора
+message Author {
+  int64 id = 1;
+  string name = 2;
+}
+// Ответ со списком авторов
+message ResponseAuthor {
+  repeated Author authors = 1;
+}
+
+// Данные книги
+message Book {
+  int64 id = 1;
+  string title = 2;
+}
+// Ответ со списком книг
+message ResponseBook {
+  repeated Book books = 1;
+}

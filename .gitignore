@@ -1,0 +1,6 @@
+.vscode
+.idea
+*.exe
+task.txt
+test_client
+test_server
