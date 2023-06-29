@@ -1,13 +1,30 @@
 package store
 
-import "testing"
+import (
+	"github.com/Victor1995fed/golang-test-cvado/config"
+	"github.com/Victor1995fed/golang-test-cvado/internal/repository/database"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
-const Id = 1
+const (
+	bookIdSuccess = 1
+	bookIdFail    = 999
+	envPath       = "../../../.env"
+)
 
-func GetRepo() {
-
+// Тест метода получения автора по книге (успешный)
+func TestGetAuthorsByBookSuccess(t *testing.T) {
+	cfg := config.ParseConfig(envPath)
+	db := database.Connect(&cfg)
+	authors, _ := GetAuthorsByBook(database.New(db), bookIdSuccess)
+	assert.NotEmpty(t, authors)
 }
 
-func TestGetAuthorsByBook(t *testing.T) {
-	//GetAuthorsByBook()
+// Тест метода получения автора по книге (неудачный)
+func TestGetAuthorsByBookNotFound(t *testing.T) {
+	cfg := config.ParseConfig(envPath)
+	db := database.Connect(&cfg)
+	authors, _ := GetAuthorsByBook(database.New(db), bookIdFail)
+	assert.Empty(t, authors)
 }

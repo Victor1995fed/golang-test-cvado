@@ -21,5 +21,8 @@ up_client:
 	@echo "Done!"
 stop:
 	docker-compose stop
+
+tests:
+	go test -v ./...
 gen-protoc:
 	@protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative  proto/server.proto
